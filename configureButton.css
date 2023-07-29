@@ -1,0 +1,77 @@
+:root {
+    --bg: #1a1e24;
+    --color: #eee;
+    --font: Montserrat, Roboto, Helvetica, Arial, sans-serif;
+}
+.confBtn {
+    height: 50px;
+    width: 200px;
+    border: 5px solid #9415cf;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    font-size: 16px;
+    font-weight: 300;
+    cursor: pointer;
+}
+
+.btnWrapper span{
+    padding: 5px;
+    font-weight: 300;
+}
+
+.btnWrapper {
+    padding: 1.5rem 0;
+    filter: url('#goo');
+    margin-top: 40px;
+}
+
+.configureBtn {
+    display: inline-block;
+    text-align: center;
+    background: #9415cf;
+    color: #fff;
+    font-weight: 700;
+    padding: 1.18em 1.32em 1.03em;
+    line-height: 1;
+    border-radius: 1em;
+    position: relative;
+    min-width: 8.23em;
+    text-decoration: none;
+    font-size: 1.55rem;
+    cursor: pointer;
+    transition: background 1s;
+}
+
+.configureBtn:before,
+.configureBtn:after {
+    width: 4.4em;
+    height: 2.95em;
+    position: absolute;
+    content: "";
+    display: inline-block;
+    background: #9415cf;
+    border-radius: 50%;
+    transition: transform 1s ease;
+    transform: scale(0);
+    z-index: -1;
+}
+
+.configureBtn:before {
+    top: -25%;
+    left: 20%;
+}
+
+.configureBtn:after {
+    bottom: -25%;
+    right: 20%;
+}
+.configureBtn:hover{
+    background: #6c15cf;
+}
+.configureBtn:hover:before,
+.configureBtn:hover:after {
+    transform: none;
+    background: #6c15cf;
+}
