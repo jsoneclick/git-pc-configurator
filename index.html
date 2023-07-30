@@ -24,9 +24,37 @@
       <div class="constructorWrapper">
         Configurator page there
       </div>
+      
       <video class="preloaderVideo" autoplay muted>
         <source src="src/videos/starSkyVideo.mp4" type="video/mp4">
       </video>
+      <div id="universe">
+        <div id="galaxy">
+          <div class="circle"></div>
+          <div class="circle2"></div>
+          <div class="circle3"></div>
+          <div id="orbit0">
+            <div id="pos0">
+              <div id="dot0"></div>
+            </div>
+          </div>
+          <div id="orbit1">
+            <div id="pos1">
+              <div id="dot1"></div>
+            </div>
+          </div>
+          <div id="orbit2">
+            <div id="pos2">
+              <div id="dot2"></div>
+            </div>
+          </div>
+          <div id="orbit3">
+            <div id="pos3">
+              <div id="dot3"></div>
+            </div>
+          </div>
+        </div>
+      </div>
         <div class="mainContainer">
             <img src="src/images/mainWrapperImg.jpg" alt="background">
             <img src="src/images/mainImg.png" alt="pc">
@@ -47,57 +75,66 @@
                     </filter>
                 </defs>
             </svg>
-            
         </div>
         </div>
     </section>
     <section class="infoWrapper">
         <div class="infoHeader">
           <div class="infoText">
-            <h2>Our simple, easy-to-use and well designed constructor will help you to fastly create your dream PC</h2>
-            <h2>Just follow some simple rules and lest our algorithm do a dirty job for you</h2>
-            <h2>Look at this cool scheme! Easy right? You literally can do the same thing!</h2>
+            <h2>
+              <span>
+                Build Your Dream PC Hassle-Free
+              </span><br>
+              Looking to create your dream PC configuration without the headache of compatibility issues? You've come to the right place! 
+              Our PC Configurator is designed to make the process of building your ideal computer a breeze. With our user-friendly interface 
+              and AI-powered assistance by ChatGPT, you can easily select the perfect components for your custom PC.<br>
+              <span style="font-weight:500 !important; font-family: 'Gloria Hallelujah', cursive; color: #ac45d4;">
+                Look at this cool scheme! Easy right? You literally can do the same thing!
+              </span>
+            </h2>
         </div>
-        <img src="src/images/infoImg.png" alt="scheme" width="60%" height="auto">
+        <img src="src/images/infoImg3.png" alt="scheme" width="60%" height="auto">
       </div>
-      <div id="demo" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-indicators">
-            <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
-            <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
-            <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
-          </div>
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src="https://blog.bestbuy.ca/wp-content/uploads/2020/06/build-pc-man-tools-16x9.jpg.rendition.intel_.web_.1072.603.jpg" alt="Los Angeles" class="d-block" style="width:100%">
-              <div class="carousel-caption">
-                <h3>Los Angeles</h3>
-                <p>We had such a great time in LA!</p>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <img src="https://geekawhat.com/wp-content/uploads/2022/06/Feature-Image-PC-Building-Checklist-1.jpg" alt="Chicago" class="d-block" style="width:100%">
-              <div class="carousel-caption">
-                <h3>Chicago</h3>
-                <p>Thank you, Chicago!</p>
-              </div> 
-            </div>
-            <div class="carousel-item">
-              <img src="https://pcbros.tech/cdn/shop/products/PXL_20220407_135813056.PORTRAIT.jpg?v=1649355485&width=3979" alt="New York" class="d-block" style="width:100%">
-              <div class="carousel-caption">
-                <h3>New York</h3>
-                <p>We love the Big Apple!</p>
-              </div>  
-            </div>
-          </div>
-
-          <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
-            <span class="carousel-control-next-icon"></span>
-          </button>
+      <div id="carouselExampleCaptions" class="carousel slide">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="https://images.pexels.com/photos/735911/pexels-photo-735911.jpeg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>First slide label</h5>
+              <p>Some representative placeholder content for the first slide.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="https://images.pexels.com/photos/1714208/pexels-photo-1714208.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Second slide label</h5>
+              <p>Some representative placeholder content for the second slide.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="https://images.pexels.com/photos/777001/pexels-photo-777001.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Third slide label</h5>
+              <p>Some representative placeholder content for the third slide.</p>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
   
+      
   <div class="container-fluid mt-3">
     <h3>All rights reserved 2023</h3>
   </div>
