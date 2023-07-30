@@ -18,7 +18,9 @@ function changeToConf() {
                     preloaderVideo.style.opacity = 0;
                     setTimeout(function(){
                         preloaderVideo.style.display = "none";
-                        setTimeout(function(){constructorWrapper.style.display = "block"}, 500);
+                        setTimeout(function(){
+                            constructorWrapper.style.display = "block";
+                        }, 500);
                     }, 100);
                 }, 3000);
             }, 500);
