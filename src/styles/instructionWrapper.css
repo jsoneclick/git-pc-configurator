@@ -1,0 +1,23 @@
+.instructionWrapper h1 {
+    color: rgb(165, 64, 206);
+    font-size: 48px;
+    font-weight: 800;
+    text-align: left !important;
+}
+.instructionWrapper h2 {
+    color: rgb(190, 190, 190);
+    font-size: 32px;
+    font-weight: 600;
+    margin: 20px;
+    padding: 10px;
+    border-radius: 100px;
+    text-align: left !important;
+}
+.instructionWrapper  {
+    color: rgb(112, 111, 129);
+    font-size: 24px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 200;
+    padding-top: 50px;
+    
+}

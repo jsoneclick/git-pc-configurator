@@ -31,11 +31,8 @@
     font-size: 24px;
     font-weight: 300;
     letter-spacing: 2px;
-    margin-top: 40px;
-    
+    margin-top: 40px; 
 }
-
-
 .mainContainer h2 span {
     font-weight: 700;
 }
@@ -48,7 +45,6 @@
     animation: image1 4s 1;
     transition: height 2s;
 } 
-
 @keyframes image1 {
     0%{margin-right: -200px;}
     100%{margin-right: 0px;}
