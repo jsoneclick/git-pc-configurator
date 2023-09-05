@@ -1,57 +1,70 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap');
+
 * {
     margin: 0;
     padding: 0;
-    
 }
-body{
+
+body {
     background: linear-gradient(90deg, #09051a, #000000);
     box-sizing: border-box;
     overflow-x: hidden;
 }
 
-
-
 .carouselExampleCaptions img {
     aspect-ratio: 16 / 9;
-    
 }
 
-#carouselExampleCaptions{
+#carouselExampleCaptions {
     transform: scale(.7);
 }
 
+.carousel-indicators {
+    position: absolute !important;
+    width: 100% !important;
+    left: -15% !important;
+}
+
 @media only screen and (max-width: 900px) {
-    .mainWrapper{
+    .mainWrapper {
         height: 100vh !important;
     }
-    .mainContainer{
+
+    .mainContainer {
         height: 100vh !important;
     }
+
     .infoWrapper {
         padding: 40px !important;
         text-align: justify;
     }
+
     .infoWrapper img {
         width: 100% !important;
     }
-    .infoText{
+
+    .infoText {
         width: 100% !important;
     }
+
     #carouselExampleCaptions {
         transform: scale(1) !important;
     }
+
     .mainText {
         padding: 40px !important;
     }
+
     .mainText h1 {
         font-size: 45px !important;
     }
+
     .mainText h2 {
         width: 100% !important;
         text-align: justify;
     }
+
     .mainContainer img:nth-child(1) {
         bottom: 0;
         height: 50vh;
@@ -66,19 +79,13 @@ body{
         bottom: 40px !important;
         top: auto !important;
         height: auto !important;
-        position: absolute  !important;
+        position: absolute !important;
         right: 40px !important;
         width: 55% !important;
         transform: rotateY(180deg) !important;
     }
+
     .mainContainer img:nth-child(3) {
         display: none !important;
     }
-  }
-
- 
-  .carousel-indicators{
-    position: absolute !important;
-    width: 100% !important;
-    left: -15% !important;
-  }
+}

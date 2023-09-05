@@ -1,10 +1,10 @@
-.infoWrapper{
+.infoWrapper {
     width: 100vw;
     height: 100vh;
     background: linear-gradient(90deg, #09051a, #000000);
-    padding:100px;
-    transition:height 2s;
-    transition:opacity 2s;
+    padding: 100px;
+    transition: height 2s;
+    transition: opacity 2s;
 }
 
 .infoWrapper img {
@@ -17,10 +17,10 @@
     overflow: hidden;
     animation: infoAppir 4s 1;
 }
-.infoText{
+
+.infoText {
     width: 50%;
     display: inline-block;
-
 }
 
 .infoText h2 {
@@ -32,15 +32,29 @@
 .infoText h2 span:nth-child(1) {
     font-weight: 900;
 }
+
 .infoText h2 span:nth-child(2) {
     font-weight: 900 !important;
 }
 
 @keyframes infoAppir {
-    0%{ opacity: 0;}
-    25%{ opacity: 0;}
-    50%{ opacity: 0;}
-    75%{ opacity: 0;}
-    100%{ opacity: 1;}
-}
+    0% {
+        opacity: 0;
+    }
 
+    25% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    75% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
