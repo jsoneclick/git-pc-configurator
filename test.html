@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PC Component Selector</title>
+  <style>
+        body {
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .selectors {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+
+    .selector {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+    }
+
+    #compatibilityStatus {
+      text-align: center;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>PC Component Selector</h1>
+  
+  <div class="selectors">
+    <div class="selector" id="cpuSelector">
+      <h2>CPU Selector</h2>
+      <select id="cpuDropdown"></select>
+    </div>
+    
+    <div class="selector" id="gpuSelector">
+      <h2>GPU Selector</h2>
+      <select id="gpuDropdown"></select>
+    </div>
+    
+    <div class="selector" id="motherboardSelector">
+      <h2>Motherboard Selector</h2>
+      <select id="motherboardDropdown"></select>
+    </div>
+  </div>
+  
+  <div id="compatibilityStatus"></div>
+  
+  <script>
+ // Define arrays for CPU, GPU, and Motherboard components
+ const cpus = [
+  { name: 'Intel Core i7-9700K', generation: '9th' },
+  { name: 'AMD Ryzen 7 3700X', generation: '3rd' },
+  { name: 'Intel Core i9-11900K', generation: '11th' },
+  { name: 'AMD Ryzen 9 5900X', generation: '5th' },
+  { name: 'Intel Core i5-9600K', generation: '9th' },
+  { name: 'AMD Ryzen 5 3600X', generation: '3rd' },
+  { name: 'Intel Core i3-10100', generation: '10th' },
+  { name: 'AMD Ryzen 3 3300X', generation: '3rd' },
+  { name: 'Intel Core i7-11700K', generation: '11th' },
+  { name: 'AMD Ryzen 7 5800X', generation: '5th' },
+  {name: 'Kakayato huinya 2nd gena', generation: '2nd'}
+];
+
+const gpus = [
+  { name: 'NVIDIA GeForce RTX 2080', generation: 'Turing' },
+  { name: 'AMD Radeon RX 5700 XT', generation: 'Navi' },
+  { name: 'NVIDIA GeForce RTX 3060', generation: 'Ampere' },
+  { name: 'AMD Radeon RX 6800', generation: 'RDNA 2' },
+  { name: 'NVIDIA GeForce GTX 1660 Ti', generation: 'Turing' },
+  { name: 'AMD Radeon RX 5500 XT', generation: 'Navi' },
+  { name: 'NVIDIA GeForce RTX 3090', generation: 'Ampere' },
+  { name: 'AMD Radeon RX 6900 XT', generation: 'RDNA 2' },
+  { name: 'NVIDIA GeForce RTX 3070', generation: 'Ampere' },
+  { name: 'AMD Radeon RX 6700 XT', generation: 'RDNA 2' }
+];
+
+const motherboards = [
+  { name: 'ASUS ROG Strix Z390', supportedGenerations: ['9th'] },
+  { name: 'MSI MPG X570 Gaming Edge', supportedGenerations: ['3rd'] },
+  { name: 'ASRock B560M-HDV', supportedGenerations: ['11th'] },
+  { name: 'GIGABYTE B550 AORUS PRO', supportedGenerations: ['5th'] },
+  { name: 'MSI B450 TOMAHAWK', supportedGenerations: ['2nd'] },
+  { name: 'ASUS TUF Gaming X570-PLUS', supportedGenerations: ['3rd'] },
+  { name: 'GIGABYTE Z590 AORUS PRO', supportedGenerations: ['11th'] },
+  { name: 'ASRock B450M PRO4', supportedGenerations: ['2nd'] },
+  { name: 'MSI Z490-A PRO', supportedGenerations: ['10th'] },
+  { name: 'ASUS PRIME B350-PLUS', supportedGenerations: ['1st'] }
+];
+
+
+// Function to populate a dropdown with component options
+const populateDropdown = (dropdown, components) => {
+  components.forEach(component => {
+    const option = document.createElement('option');
+    option.value = component.name;
+    option.textContent = component.name;
+    dropdown.appendChild(option);
+  });
+};
+
+// Populate CPU, GPU, and Motherboard dropdowns
+const cpuDropdown = document.getElementById('cpuDropdown');
+const gpuDropdown = document.getElementById('gpuDropdown');
+const motherboardDropdown = document.getElementById('motherboardDropdown');
+
+populateDropdown(cpuDropdown, cpus);
+populateDropdown(gpuDropdown, gpus);
+populateDropdown(motherboardDropdown, motherboards);
+
+// Compatibility checking function
+const compatibilityStatus = document.getElementById('compatibilityStatus');
+
+const checkCompatibility = () => {
+  const selectedCpu = cpus.find(cpu => cpu.name === cpuDropdown.value);
+  const selectedGpu = gpus.find(gpu => gpu.name === gpuDropdown.value);
+  const selectedMotherboard = motherboards.find(mobo => mobo.name === motherboardDropdown.value);
+
+  if (!selectedCpu || !selectedGpu || !selectedMotherboard) {
+    compatibilityStatus.textContent = 'Please select all components.';
+    compatibilityStatus.style.color = 'red';
+    return;
+  }
+
+  if (!selectedMotherboard.supportedGenerations.includes(selectedCpu.generation)) {
+    compatibilityStatus.textContent = 'Components are not compatible!';
+    compatibilityStatus.style.color = 'red';
+  } else {
+    compatibilityStatus.textContent = 'Components are compatible!';
+    compatibilityStatus.style.color = 'green';
+  }
+};
+
+// Event listeners
+cpuDropdown.addEventListener('change', checkCompatibility);
+gpuDropdown.addEventListener('change', checkCompatibility);
+motherboardDropdown.addEventListener('change', checkCompatibility);
+  </script>
+</body>
+</html>
