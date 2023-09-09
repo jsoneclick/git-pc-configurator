@@ -26,6 +26,29 @@
                     <li>Our choice</li>
                     <li>Trending</li>
                 </ul>
+                <form id="testComponents">
+                <input type="checkbox" onclick = "testCheckbox('CASE')"> Case<br>
+                <input type="checkbox" onclick = "testCheckbox('CPU')"> CPU<br>
+                <input type="checkbox" onclick = "testCheckbox('GPU')"> GPU<br>
+                <input type="checkbox" onclick = "testCheckbox('PSU')"> PSU<br>
+                <input type="checkbox" onclick = "testCheckbox('NVME')"> NVMe<br>
+                <input type="checkbox" onclick = "testCheckbox('STORAGE_1')"> HDD1<br>
+                <input type="checkbox" onclick = "testCheckbox('STORAGE_2')"> HDD2<br>
+                <input type="checkbox" onclick = "testCheckbox('STORAGE_3')"> HDD3<br>
+                <input type="checkbox" onclick = "testCheckbox('STORAGE_4')"> HDD4<br>
+                <input type="checkbox" onclick = "testCheckbox('RAM_1')"> RAM1<br>
+                <input type="checkbox" onclick = "testCheckbox('RAM_2')"> RAM2<br>
+                <input type="checkbox" onclick = "testCheckbox('RAM_3')"> RAM3<br>
+                <input type="checkbox" onclick = "testCheckbox('RAM_4')"> RAM4<br>
+                <input type="checkbox" onclick = "testCheckbox('CPU_FAN')"> CPU FAN<br>
+                <input type="checkbox" onclick = "testCheckbox('REAR_FAN')"> R FAN<br>
+                <input type="checkbox" onclick = "testCheckbox('FRONT_FAN_1')"> F FAN1<br>
+                <input type="checkbox" onclick = "testCheckbox('FRONT_FAN_2')"> F FAN2<br>
+                <input type="checkbox" onclick = "testCheckbox('FRONT_FAN_3')"> F FAN3<br>
+                <input type="checkbox" onclick = "testCheckbox('UPPER_FAN_1')"> U FAN1<br>
+                <input type="checkbox" onclick = "testCheckbox('UPPER_FAN_2')"> U FAN2<br>
+                <input type="checkbox" onclick = "testCheckbox('MOTHERBOARD')"> Motherboard<br>
+            </form>
             </aside>
             <main>
                 <svg id="vector-computer" width="392" height="412" viewBox="0 0 392 412" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -51,7 +74,7 @@
                         d="M33 22H30C25.0294 22 21 26.0294 21 31V87C21 91.9706 25.0294 96 30 96H33C37.9706 96 42 91.9706 42 87V31C42 26.0294 37.9706 22 33 22Z"/>
                     <path data-bs-toggle="tooltip" title="Upper Cooler 1"
                         d="M143 34L143 31C143 26.0294 138.971 22 134 22L78 22C73.0294 22 69 26.0294 69 31L69 34C69 38.9706 73.0294 43 78 43L134 43C138.971 43 143 38.9706 143 34Z"/>
-                    <path data-bs-toggle="tooltip" title="Rear Cooler 2"
+                    <path data-bs-toggle="tooltip" title="Upper Cooler 2"
                         d="M264 34L264 31C264 26.0294 259.971 22 255 22L199 22C194.029 22 190 26.0294 190 31L190 34C190 38.9706 194.029 43 199 43L255 43C259.971 43 264 38.9706 264 34Z"/>
                     <path data-bs-toggle="tooltip" title="Front Cooler 3"
                         d="M362 196H359C354.029 196 350 200.029 350 205V261C350 265.971 354.029 270 359 270H362C366.971 270 371 265.971 371 261V205C371 200.029 366.971 196 362 196Z"/>
@@ -138,6 +161,14 @@
             </main>
         </div>
         <script>
+            let userReadyConfiguration = [
+            {
+
+            },
+            {},
+            {},
+            {}
+            ];
             var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
             var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
               return new bootstrap.Tooltip(tooltipTriggerEl)
@@ -161,36 +192,105 @@
 
             let vectorComputer = document.getElementById("vector-computer");
             let computerElements = vectorComputer.getElementsByTagName("path");
-            const GPU = [23, 24]; 
-            const CASE = [0, 1, 2, 3, 5, 6, 11];
-            const MOTHERBOARD = [27, 28];
-            const RAM_1 = [19];
-            const RAM_2 = [21];
-            const RAM_3 = [22];
-            const RAM_4 = [18];
-            const CPU_FAN = [25];
-            const CPU = [26];
-            const NVME = [20];
-            const PSU = [4];
-            const STORAGE_1 = [7];
-            const STORAGE_2 = [10];
-            const STORAGE_3 = [9];
-            const STORAGE_4 = [8];
-            const REAR_FAN = [12];
-            const UPPER_FAN_1 = [13];
-            const UPPER_FAN_2 = [14];
-            const FRONT_FAN_1 = [17];
-            const FRONT_FAN_2 = [16];
-            const FRONT_FAN_3 = [15];
+            let testComponents = document.getElementById("testComponents");
+            let checkbox = testComponents.getElementsByTagName("input");
+
+            
+            
+            let choosenComponents = [];
+            let allComponents = [];
+            // const components ={
+            //     const GPU = [23, 24]; 
+            //     const CASE = [0, 1, 2, 3, 5, 6, 11];
+            //     const MOTHERBOARD = [27, 28];
+            //     const RAM_1 = [19];
+            //     const RAM_2 = [21];
+            //     const RAM_3 = [22];
+            //     const RAM_4 = [18];
+            //     const CPU_FAN = [25];
+            //     const CPU = [26];
+            //     const NVME = [20];
+            //     const PSU = [4];
+            //     const STORAGE_1 = [7];
+            //     const STORAGE_2 = [10];
+            //     const STORAGE_3 = [9];
+            //     const STORAGE_4 = [8];
+            //     const REAR_FAN = [12];
+            //     const UPPER_FAN_1 = [13];
+            //     const UPPER_FAN_2 = [14];
+            //     const FRONT_FAN_1 = [17];
+            //     const FRONT_FAN_2 = [16];
+            //     const FRONT_FAN_3 = [15];
+            // }
+
+            const components ={
+                GPU: [23, 24], 
+                CASE: [0, 1, 2, 3, 5, 6, 11],
+                MOTHERBOARD: [27, 28],
+                RAM_1: [19],
+                RAM_2: [21],
+                RAM_3: [22],
+                RAM_4: [18],
+                CPU_FAN: [25],
+                CPU: [26],
+                NVME: [20],
+                PSU: [4],
+                STORAGE_1: [7],
+                STORAGE_2: [10],
+                STORAGE_3: [9],
+                STORAGE_4: [8],
+                REAR_FAN: [12],
+                UPPER_FAN_1: [13],
+                UPPER_FAN_2: [14],
+                FRONT_FAN_1: [17],
+                FRONT_FAN_2: [16],
+                FRONT_FAN_3: [15]
+            }
+            
+
+
+            //allComponents = [GPU, CASE, MOTHERBOARD, RAM_1, RAM_2, RAM_3, RAM_4, CPU_FAN, CPU, NVME, PSU, STORAGE_1, STORAGE_2, STORAGE_3, STORAGE_4, REAR_FAN, UPPER_FAN_1, UPPER_FAN_2, FRONT_FAN_1, FRONT_FAN_2, FRONT_FAN_3];
+
+
+
+            // let testCheckbox = (checkboxId, newComponent) => {
+            //     if (checkbox[checkboxId].checked){
+            //         choosenComponents.push(newComponent);
+            //         undefinedComponent(...choosenComponents);
+            //         alert("added component");
+            //     } else {
+            //         let index = choosenComponents.indexOf(newComponent);
+            //         if (index !== -1) {
+            //             choosenComponents.splice(index, 1);
+            //         }
+            //         undefinedComponent(...choosenComponents);
+            //         alert("removed component");
+            //     }
+            // }
+
+            let testCheckbox = (componentType) => {
+  const componentArray = components[componentType];
+  if (!componentArray) return;
+  if (choosenComponents.some((item) => componentArray.includes(item))) {
+    choosenComponents = choosenComponents.filter((item) => !componentArray.includes(item));
+  } else {
+    choosenComponents.push(...componentArray);
+  }
+  undefinedComponent(...choosenComponents);
+};
 
             let undefinedComponent = (...component) => {
+                for(let i = 0; i < computerElements.length; i++){
+                    computerElements[i].style.stroke = "#ffffff50";
+                }
                 for (let i = 0; i < component.length; i++){
-                    computerElements[component[i]].style.stroke = "#ffffff";
+                    computerElements[component[i]].style.stroke = "#ffffff";  
                 }
             }
+
             //undefined component
-            undefinedComponent(...CASE, ...GPU, STORAGE_3, ...MOTHERBOARD, STORAGE_2, STORAGE_1, PSU, REAR_FAN, CPU, CPU_FAN, UPPER_FAN_1, UPPER_FAN_2, FRONT_FAN_1, FRONT_FAN_2);
             
+           //undefinedComponent(...choosenComponents);
 
             </script>
     </body>
