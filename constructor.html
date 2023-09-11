@@ -14,7 +14,7 @@
         <div class="constructorWrapper">
             <nav>
                 <ul>
-                    <li>Save</li>
+                    <li onclick="alert('chel ty dalbaeb')">Save </li>
                     <li><input type="text"></li>
                     <li></li>
                 </ul>
@@ -49,6 +49,9 @@
                 <input type="checkbox" onclick = "testCheckbox('UPPER_FAN_2')"> U FAN2<br>
                 <input type="checkbox" onclick = "testCheckbox('MOTHERBOARD')"> Motherboard<br>
             </form>
+            </aside>
+            <aside class="right-components-list">
+                components
             </aside>
             <main>
                 <svg id="vector-computer" width="392" height="412" viewBox="0 0 392 412" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -150,13 +153,14 @@
                     <span><i class="fa-solid fa-fan"></i> CPU Cooler</span>
                     <span><i class="bi bi-pc"></i> Case</span>
                     <span><i class="fa-solid fa-fan"></i> Front Coolers</span>
-                    <span><i class="fa-solid fa-memory"></i> RAM</span>
-                    <span><i class="bi bi-motherboard"></i> Motherboard</span>
+                    <span><i class="fa-solid fa-memory"></i> <select id="ramDropdown"></select></span>
+                    <span><i class="bi bi-motherboard"></i> <select id="motherboardDropdown"></select></span>
                     <span><i class="bi bi-hdd-stack"></i> HDD Storage</span>
-                    <span><i class="bi bi-device-ssd"></i> NVMe</span>
-                    <span><i class="fa-solid fa-bolt"></i> PSU</span>
-                    <span><i class="bi bi-gpu-card"></i> GPU</span>
-                    <span><i class="fa-solid fa-microchip"></i> CPU</span>
+                    <span><i class="bi bi-device-ssd"></i> <select id="nvmeDropdown"></select></span>
+                    <span><i class="fa-solid fa-bolt"></i> <select id="psuDropdown"></select></span>
+                    <span><i class="bi bi-gpu-card"></i> <select id="gpuDropdown"></select></span>
+                    <span><i class="fa-solid fa-microchip"></i> <select id="cpuDropdown"></select></span>
+                    <div id="compatibilityStatus"></div>
                 </div>
             </main>
         </div>
@@ -173,56 +177,12 @@
             var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
               return new bootstrap.Tooltip(tooltipTriggerEl)
             });
-
-             // 0(case), 1,2(left,right foot),3(line under the psu and hhd),5,6(left, right hdd case), 11(front coolers holder case)  - case,
-            // 4 - PSU,
-            // 7 - hhd1,
-            // 8 - hhd4,
-            // 9 - hhd3,
-            // 10 - hhd2,
-            // 12 - rear cool
-            // 13, 14 - upper cools(left, right) 
-            // 15,16,17 - front cools(3, 2, 1)
-            // 18,19,21,22 - ram sticks (4,1,2,3)
-            //20 - nvme
-            //23,24 - gpu
-            //25 - cpu cooler
-            //26 - cpu
-            //27,28 - motherboard
-
             let vectorComputer = document.getElementById("vector-computer");
             let computerElements = vectorComputer.getElementsByTagName("path");
             let testComponents = document.getElementById("testComponents");
             let checkbox = testComponents.getElementsByTagName("input");
-
-            
-            
             let choosenComponents = [];
             let allComponents = [];
-            // const components ={
-            //     const GPU = [23, 24]; 
-            //     const CASE = [0, 1, 2, 3, 5, 6, 11];
-            //     const MOTHERBOARD = [27, 28];
-            //     const RAM_1 = [19];
-            //     const RAM_2 = [21];
-            //     const RAM_3 = [22];
-            //     const RAM_4 = [18];
-            //     const CPU_FAN = [25];
-            //     const CPU = [26];
-            //     const NVME = [20];
-            //     const PSU = [4];
-            //     const STORAGE_1 = [7];
-            //     const STORAGE_2 = [10];
-            //     const STORAGE_3 = [9];
-            //     const STORAGE_4 = [8];
-            //     const REAR_FAN = [12];
-            //     const UPPER_FAN_1 = [13];
-            //     const UPPER_FAN_2 = [14];
-            //     const FRONT_FAN_1 = [17];
-            //     const FRONT_FAN_2 = [16];
-            //     const FRONT_FAN_3 = [15];
-            // }
-
             const components ={
                 GPU: [23, 24], 
                 CASE: [0, 1, 2, 3, 5, 6, 11],
@@ -246,28 +206,6 @@
                 FRONT_FAN_2: [16],
                 FRONT_FAN_3: [15]
             }
-            
-
-
-            //allComponents = [GPU, CASE, MOTHERBOARD, RAM_1, RAM_2, RAM_3, RAM_4, CPU_FAN, CPU, NVME, PSU, STORAGE_1, STORAGE_2, STORAGE_3, STORAGE_4, REAR_FAN, UPPER_FAN_1, UPPER_FAN_2, FRONT_FAN_1, FRONT_FAN_2, FRONT_FAN_3];
-
-
-
-            // let testCheckbox = (checkboxId, newComponent) => {
-            //     if (checkbox[checkboxId].checked){
-            //         choosenComponents.push(newComponent);
-            //         undefinedComponent(...choosenComponents);
-            //         alert("added component");
-            //     } else {
-            //         let index = choosenComponents.indexOf(newComponent);
-            //         if (index !== -1) {
-            //             choosenComponents.splice(index, 1);
-            //         }
-            //         undefinedComponent(...choosenComponents);
-            //         alert("removed component");
-            //     }
-            // }
-
             let testCheckbox = (componentType) => {
   const componentArray = components[componentType];
   if (!componentArray) return;
@@ -278,7 +216,6 @@
   }
   undefinedComponent(...choosenComponents);
 };
-
             let undefinedComponent = (...component) => {
                 for(let i = 0; i < computerElements.length; i++){
                     computerElements[i].style.stroke = "#ffffff50";
@@ -288,10 +225,186 @@
                 }
             }
 
-            //undefined component
-            
-           //undefinedComponent(...choosenComponents);
+            const cpus = [
+            { name: 'Intel Core i7-9700K', generation: '9th', maxTDP: 95 },
+            { name: 'AMD Ryzen 7 3700X', generation: '3rd', maxTDP: 65 },
+            { name: 'Intel Core i9-11900K', generation: '11th', maxTDP: 125 },
+            { name: 'AMD Ryzen 9 5900X', generation: '5th', maxTDP: 105 },
+            { name: 'Intel Core i5-9600K', generation: '9th', maxTDP: 95 },
+            { name: 'AMD Ryzen 5 3600X', generation: '3rd', maxTDP: 95 },
+            { name: 'Intel Core i3-10100', generation: '10th', maxTDP: 65 },
+            { name: 'AMD Ryzen 3 3300X', generation: '3rd', maxTDP: 65 },
+            { name: 'Intel Core i7-11700K', generation: '11th', maxTDP: 125 },
+            { name: 'AMD Ryzen 7 5800X', generation: '5th', maxTDP: 105 },
+            { name: 'Kakayato huinya 2nd gena', generation: '2nd', maxTDP: 75 }
+            ];
 
+            const gpus = [
+            { name: 'NVIDIA GeForce RTX 2080', generation: 'Turing', maxTDP: 215 },
+            { name: 'AMD Radeon RX 5700 XT', generation: 'Navi', maxTDP: 225 },
+            { name: 'NVIDIA GeForce RTX 3060', generation: 'Ampere', maxTDP: 170 },
+            { name: 'AMD Radeon RX 6800', generation: 'RDNA 2', maxTDP: 250 },
+            { name: 'NVIDIA GeForce GTX 1660 Ti', generation: 'Turing', maxTDP: 120 },
+            { name: 'AMD Radeon RX 5500 XT', generation: 'Navi', maxTDP: 130 },
+            { name: 'NVIDIA GeForce RTX 3090', generation: 'Ampere', maxTDP: 350 },
+            { name: 'AMD Radeon RX 6900 XT', generation: 'RDNA 2', maxTDP: 300 },
+            { name: 'NVIDIA GeForce RTX 3070', generation: 'Ampere', maxTDP: 220 },
+            { name: 'AMD Radeon RX 6700 XT', generation: 'RDNA 2', maxTDP: 230 }
+            ];
+
+            const motherboards = [
+            { name: 'ASUS ROG Strix Z390', supportedGenerations: ['9th']},
+            { name: 'MSI MPG X570 Gaming Edge', supportedGenerations: ['3rd'] },
+            { name: 'ASRock B560M-HDV', supportedGenerations: ['11th'] },
+            { name: 'GIGABYTE B550 AORUS PRO', supportedGenerations: ['5th'] },
+            { name: 'MSI B450 TOMAHAWK', supportedGenerations: ['2nd'] },
+            { name: 'ASUS TUF Gaming X570-PLUS', supportedGenerations: ['3rd'] },
+            { name: 'GIGABYTE Z590 AORUS PRO', supportedGenerations: ['11th'] },
+            { name: 'ASRock B450M PRO4', supportedGenerations: ['2nd'] },
+            { name: 'MSI Z490-A PRO', supportedGenerations: ['10th'] },
+            { name: 'ASUS PRIME B350-PLUS', supportedGenerations: ['1st'] }
+            ];
+
+            const ramModules = [
+            { name: 'Corsair Vengeance LPX 16GB', type: 'DDR4' },
+            { name: 'G.Skill Ripjaws V 32GB', type: 'DDR4' },
+            { name: 'Crucial Ballistix 8GB', type: 'DDR4' },
+            { name: 'Kingston HyperX Fury 16GB', type: 'DDR4' },
+            { name: 'ADATA XPG Z1 32GB', type: 'DDR4' },
+            { name: 'Corsair Dominator Platinum 64GB', type: 'DDR4' },
+            { name: 'Crucial Ballistix 16GB', type: 'DDR4' },
+            { name: 'Team Group T-Force Delta RGB 32GB', type: 'DDR4' },
+            { name: 'Patriot Viper 4 16GB', type: 'DDR4' },
+            { name: 'G.Skill Trident Z RGB 64GB', type: 'DDR4' },
+            ];
+
+            const psus = [
+            { name: 'EVGA 750W 80+ Gold', wattage: 750 },
+            { name: 'Corsair RM850x 850W 80+ Gold', wattage: 850 },
+            { name: 'Seasonic Focus GX-650 650W 80+ Gold', wattage: 650 },
+            { name: 'Cooler Master MWE Gold 550W 80+ Gold', wattage: 550 },
+            { name: 'Thermaltake Toughpower Grand RGB 850W 80+ Platinum', wattage: 850 },
+            { name: 'be quiet! Pure Power 11 600W 80+ Gold', wattage: 600 },
+            { name: 'Corsair AX1600i 1600W 80+ Titanium', wattage: 1600 },
+            { name: 'SilverStone SFX 450W 80+ Bronze', wattage: 450 },
+            { name: 'Antec Earthwatts Gold Pro 750W 80+ Gold', wattage: 750 },
+            { name: 'NZXT C750 750W 80+ Gold', wattage: 750 },
+            ];
+
+            const nvmeDrives = [
+            { name: 'Samsung 970 EVO 500GB', interface: 'NVMe M.2' },
+            { name: 'Western Digital Blue SN550 1TB', interface: 'NVMe M.2' },
+            { name: 'Crucial P2 250GB', interface: 'NVMe M.2' },
+            { name: 'ADATA XPG SX8200 Pro 512GB', interface: 'NVMe M.2' },
+            { name: 'Sabrent Rocket 4.0 2TB', interface: 'NVMe M.2' },
+            { name: 'Seagate FireCuda 510 1TB', interface: 'NVMe M.2' },
+            { name: 'Kingston KC2500 500GB', interface: 'NVMe M.2' },
+            { name: 'Corsair MP600 1TB', interface: 'NVMe M.2' },
+            { name: 'Gigabyte AORUS NVMe Gen4 2TB', interface: 'NVMe M.2' },
+            { name: 'Crucial P5 2TB', interface: 'NVMe M.2' },
+            ];
+
+            const populateDropdown = (dropdown, components) => {
+            components.forEach(component => {
+                const option = document.createElement('option');
+                option.value = component.name;
+                option.textContent = component.name;
+                dropdown.appendChild(option);
+            });
+            };
+
+            const cpuDropdown = document.getElementById('cpuDropdown');
+            const gpuDropdown = document.getElementById('gpuDropdown');
+            const motherboardDropdown = document.getElementById('motherboardDropdown');
+            const ramDropdown = document.getElementById('ramDropdown');
+            const psuDropdown = document.getElementById('psuDropdown');
+            const nvmeDropdown = document.getElementById('nvmeDropdown');
+
+            populateDropdown(cpuDropdown, cpus);
+            populateDropdown(gpuDropdown, gpus);
+            populateDropdown(motherboardDropdown, motherboards);
+            populateDropdown(ramDropdown, ramModules);
+            populateDropdown(psuDropdown, psus);
+            populateDropdown(nvmeDropdown, nvmeDrives);
+
+            const compatibilityStatus = document.getElementById('compatibilityStatus');
+
+            const checkCompatibility = () => {
+            const selectedCpu = cpus.find(cpu => cpu.name === cpuDropdown.value);
+            const selectedGpu = gpus.find(gpu => gpu.name === gpuDropdown.value);
+            const selectedMotherboard = motherboards.find(mobo => mobo.name === motherboardDropdown.value);
+            const selectedRam = ramModules.find(ram => ram.name === ramDropdown.value);
+            const selectedPsu = psus.find(psu => psu.name === psuDropdown.value);
+            const selectedNvme = nvmeDrives.find(nvme => nvme.name === nvmeDropdown.value);
+
+            if (!selectedCpu || !selectedGpu || !selectedMotherboard || !selectedRam || !selectedPsu || !selectedNvme) {
+                compatibilityStatus.textContent = 'Please select all components.';
+                compatibilityStatus.style.color = 'red';
+                return;
+            }
+
+            if (!selectedMotherboard.supportedGenerations.includes(selectedCpu.generation)) {
+                compatibilityStatus.textContent = 'Components are not compatible!';
+                compatibilityStatus.style.color = 'red';
+                return;
+            }
+
+            if (selectedMotherboard.supportedGenerations.includes(selectedCpu.generation) && selectedMotherboard.supportedGenerations.includes('NVMe')) {
+                if (selectedNvme.interface !== 'NVMe M.2') {
+                compatibilityStatus.textContent = 'NVMe drive is not compatible with this motherboard.';
+                compatibilityStatus.style.color = 'red';
+                return;
+                }
+            }
+            const cpuGpuTDP = selectedCpu.maxTDP + selectedGpu.maxTDP;
+            const psuWattageNeeded = cpuGpuTDP + (cpuGpuTDP * 0.6);
+            if (selectedPsu.wattage < psuWattageNeeded) {
+                compatibilityStatus.textContent = 'The selected PSU does not provide sufficient wattage for your components.';
+                compatibilityStatus.style.color = 'red';
+                return;
+            }
+
+            compatibilityStatus.textContent = 'Components are compatible!';
+            compatibilityStatus.style.color = 'green';
+            };
+
+            cpuDropdown.addEventListener('change', () => {
+            checkCompatibility();
+            addToChoosenComponents(components.CPU, cpuDropdown.value);
+            });
+
+            gpuDropdown.addEventListener('change', () => {
+            checkCompatibility();
+            addToChoosenComponents(...components.GPU, gpuDropdown.value);
+            });
+
+            motherboardDropdown.addEventListener('change', () => {
+            checkCompatibility();
+            addToChoosenComponents(...components.MOTHERBOARD, motherboardDropdown.value);
+            });
+
+            ramDropdown.addEventListener('change', () => {
+            checkCompatibility();
+            addToChoosenComponents(components.RAM_1, ramDropdown.value);
+            });
+
+            psuDropdown.addEventListener('change', () => {
+            checkCompatibility();
+            addToChoosenComponents(components.PSU, psuDropdown.value);
+            });
+
+            nvmeDropdown.addEventListener('change', () => {
+            checkCompatibility();
+            addToChoosenComponents(components.NVME, nvmeDropdown.value);
+            });
+
+            const addToChoosenComponents = (componentName, ...componentType) => {
+            if (!choosenComponents.includes(componentType)) {
+                choosenComponents.push(componentType);
+            }
+            userReadyConfiguration[choosenComponents.indexOf(componentType)] = { type: componentType, name: componentName };
+            undefinedComponent(...choosenComponents);
+            };
             </script>
     </body>
 </html>

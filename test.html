@@ -50,41 +50,51 @@
       <h2>Motherboard Selector</h2>
       <select id="motherboardDropdown"></select>
     </div>
+    <select id="ramDropdown">
+      <option value="">Select RAM</option>
+    </select>
+    
+    <select id="psuDropdown">
+      <option value="">Select PSU</option>
+    </select>
+    
+    <select id="nvmeDropdown">
+      <option value="">Select NVMe Drive</option>
+    </select>
   </div>
   
   <div id="compatibilityStatus"></div>
   
   <script>
- // Define arrays for CPU, GPU, and Motherboard components
- const cpus = [
-  { name: 'Intel Core i7-9700K', generation: '9th' },
-  { name: 'AMD Ryzen 7 3700X', generation: '3rd' },
-  { name: 'Intel Core i9-11900K', generation: '11th' },
-  { name: 'AMD Ryzen 9 5900X', generation: '5th' },
-  { name: 'Intel Core i5-9600K', generation: '9th' },
-  { name: 'AMD Ryzen 5 3600X', generation: '3rd' },
-  { name: 'Intel Core i3-10100', generation: '10th' },
-  { name: 'AMD Ryzen 3 3300X', generation: '3rd' },
-  { name: 'Intel Core i7-11700K', generation: '11th' },
-  { name: 'AMD Ryzen 7 5800X', generation: '5th' },
-  {name: 'Kakayato huinya 2nd gena', generation: '2nd'}
+const cpus = [
+  { name: 'Intel Core i7-9700K', generation: '9th', maxTDP: 95 },
+  { name: 'AMD Ryzen 7 3700X', generation: '3rd', maxTDP: 65 },
+  { name: 'Intel Core i9-11900K', generation: '11th', maxTDP: 125 },
+  { name: 'AMD Ryzen 9 5900X', generation: '5th', maxTDP: 105 },
+  { name: 'Intel Core i5-9600K', generation: '9th', maxTDP: 95 },
+  { name: 'AMD Ryzen 5 3600X', generation: '3rd', maxTDP: 95 },
+  { name: 'Intel Core i3-10100', generation: '10th', maxTDP: 65 },
+  { name: 'AMD Ryzen 3 3300X', generation: '3rd', maxTDP: 65 },
+  { name: 'Intel Core i7-11700K', generation: '11th', maxTDP: 125 },
+  { name: 'AMD Ryzen 7 5800X', generation: '5th', maxTDP: 105 },
+  { name: 'Kakayato huinya 2nd gena', generation: '2nd', maxTDP: 75 }
 ];
 
 const gpus = [
-  { name: 'NVIDIA GeForce RTX 2080', generation: 'Turing' },
-  { name: 'AMD Radeon RX 5700 XT', generation: 'Navi' },
-  { name: 'NVIDIA GeForce RTX 3060', generation: 'Ampere' },
-  { name: 'AMD Radeon RX 6800', generation: 'RDNA 2' },
-  { name: 'NVIDIA GeForce GTX 1660 Ti', generation: 'Turing' },
-  { name: 'AMD Radeon RX 5500 XT', generation: 'Navi' },
-  { name: 'NVIDIA GeForce RTX 3090', generation: 'Ampere' },
-  { name: 'AMD Radeon RX 6900 XT', generation: 'RDNA 2' },
-  { name: 'NVIDIA GeForce RTX 3070', generation: 'Ampere' },
-  { name: 'AMD Radeon RX 6700 XT', generation: 'RDNA 2' }
+  { name: 'NVIDIA GeForce RTX 2080', generation: 'Turing', maxTDP: 215 },
+  { name: 'AMD Radeon RX 5700 XT', generation: 'Navi', maxTDP: 225 },
+  { name: 'NVIDIA GeForce RTX 3060', generation: 'Ampere', maxTDP: 170 },
+  { name: 'AMD Radeon RX 6800', generation: 'RDNA 2', maxTDP: 250 },
+  { name: 'NVIDIA GeForce GTX 1660 Ti', generation: 'Turing', maxTDP: 120 },
+  { name: 'AMD Radeon RX 5500 XT', generation: 'Navi', maxTDP: 130 },
+  { name: 'NVIDIA GeForce RTX 3090', generation: 'Ampere', maxTDP: 350 },
+  { name: 'AMD Radeon RX 6900 XT', generation: 'RDNA 2', maxTDP: 300 },
+  { name: 'NVIDIA GeForce RTX 3070', generation: 'Ampere', maxTDP: 220 },
+  { name: 'AMD Radeon RX 6700 XT', generation: 'RDNA 2', maxTDP: 230 }
 ];
 
 const motherboards = [
-  { name: 'ASUS ROG Strix Z390', supportedGenerations: ['9th'] },
+  { name: 'ASUS ROG Strix Z390', supportedGenerations: ['9th']},
   { name: 'MSI MPG X570 Gaming Edge', supportedGenerations: ['3rd'] },
   { name: 'ASRock B560M-HDV', supportedGenerations: ['11th'] },
   { name: 'GIGABYTE B550 AORUS PRO', supportedGenerations: ['5th'] },
@@ -96,8 +106,45 @@ const motherboards = [
   { name: 'ASUS PRIME B350-PLUS', supportedGenerations: ['1st'] }
 ];
 
+const ramModules = [
+  { name: 'Corsair Vengeance LPX 16GB', type: 'DDR4' },
+  { name: 'G.Skill Ripjaws V 32GB', type: 'DDR4' },
+  { name: 'Crucial Ballistix 8GB', type: 'DDR4' },
+  { name: 'Kingston HyperX Fury 16GB', type: 'DDR4' },
+  { name: 'ADATA XPG Z1 32GB', type: 'DDR4' },
+  { name: 'Corsair Dominator Platinum 64GB', type: 'DDR4' },
+  { name: 'Crucial Ballistix 16GB', type: 'DDR4' },
+  { name: 'Team Group T-Force Delta RGB 32GB', type: 'DDR4' },
+  { name: 'Patriot Viper 4 16GB', type: 'DDR4' },
+  { name: 'G.Skill Trident Z RGB 64GB', type: 'DDR4' },
+];
 
-// Function to populate a dropdown with component options
+const psus = [
+  { name: 'EVGA 750W 80+ Gold', wattage: 750 },
+  { name: 'Corsair RM850x 850W 80+ Gold', wattage: 850 },
+  { name: 'Seasonic Focus GX-650 650W 80+ Gold', wattage: 650 },
+  { name: 'Cooler Master MWE Gold 550W 80+ Gold', wattage: 550 },
+  { name: 'Thermaltake Toughpower Grand RGB 850W 80+ Platinum', wattage: 850 },
+  { name: 'be quiet! Pure Power 11 600W 80+ Gold', wattage: 600 },
+  { name: 'Corsair AX1600i 1600W 80+ Titanium', wattage: 1600 },
+  { name: 'SilverStone SFX 450W 80+ Bronze', wattage: 450 },
+  { name: 'Antec Earthwatts Gold Pro 750W 80+ Gold', wattage: 750 },
+  { name: 'NZXT C750 750W 80+ Gold', wattage: 750 },
+];
+
+const nvmeDrives = [
+  { name: 'Samsung 970 EVO 500GB', interface: 'NVMe M.2' },
+  { name: 'Western Digital Blue SN550 1TB', interface: 'NVMe M.2' },
+  { name: 'Crucial P2 250GB', interface: 'NVMe M.2' },
+  { name: 'ADATA XPG SX8200 Pro 512GB', interface: 'NVMe M.2' },
+  { name: 'Sabrent Rocket 4.0 2TB', interface: 'NVMe M.2' },
+  { name: 'Seagate FireCuda 510 1TB', interface: 'NVMe M.2' },
+  { name: 'Kingston KC2500 500GB', interface: 'NVMe M.2' },
+  { name: 'Corsair MP600 1TB', interface: 'NVMe M.2' },
+  { name: 'Gigabyte AORUS NVMe Gen4 2TB', interface: 'NVMe M.2' },
+  { name: 'Crucial P5 2TB', interface: 'NVMe M.2' },
+];
+
 const populateDropdown = (dropdown, components) => {
   components.forEach(component => {
     const option = document.createElement('option');
@@ -107,15 +154,21 @@ const populateDropdown = (dropdown, components) => {
   });
 };
 
-// Populate CPU, GPU, and Motherboard dropdowns
 const cpuDropdown = document.getElementById('cpuDropdown');
 const gpuDropdown = document.getElementById('gpuDropdown');
 const motherboardDropdown = document.getElementById('motherboardDropdown');
+
+const ramDropdown = document.getElementById('ramDropdown');
+const psuDropdown = document.getElementById('psuDropdown');
+const nvmeDropdown = document.getElementById('nvmeDropdown');
 
 populateDropdown(cpuDropdown, cpus);
 populateDropdown(gpuDropdown, gpus);
 populateDropdown(motherboardDropdown, motherboards);
 
+populateDropdown(ramDropdown, ramModules);
+populateDropdown(psuDropdown, psus);
+populateDropdown(nvmeDropdown, nvmeDrives);
 // Compatibility checking function
 const compatibilityStatus = document.getElementById('compatibilityStatus');
 
@@ -123,8 +176,11 @@ const checkCompatibility = () => {
   const selectedCpu = cpus.find(cpu => cpu.name === cpuDropdown.value);
   const selectedGpu = gpus.find(gpu => gpu.name === gpuDropdown.value);
   const selectedMotherboard = motherboards.find(mobo => mobo.name === motherboardDropdown.value);
+  const selectedRam = ramModules.find(ram => ram.name === ramDropdown.value);
+  const selectedPsu = psus.find(psu => psu.name === psuDropdown.value);
+  const selectedNvme = nvmeDrives.find(nvme => nvme.name === nvmeDropdown.value);
 
-  if (!selectedCpu || !selectedGpu || !selectedMotherboard) {
+  if (!selectedCpu || !selectedGpu || !selectedMotherboard || !selectedRam || !selectedPsu || !selectedNvme) {
     compatibilityStatus.textContent = 'Please select all components.';
     compatibilityStatus.style.color = 'red';
     return;
@@ -133,16 +189,35 @@ const checkCompatibility = () => {
   if (!selectedMotherboard.supportedGenerations.includes(selectedCpu.generation)) {
     compatibilityStatus.textContent = 'Components are not compatible!';
     compatibilityStatus.style.color = 'red';
-  } else {
-    compatibilityStatus.textContent = 'Components are compatible!';
-    compatibilityStatus.style.color = 'green';
+    return;
   }
+
+  if (selectedMotherboard.supportedGenerations.includes(selectedCpu.generation) && selectedMotherboard.supportedGenerations.includes('NVMe')) {
+    if (selectedNvme.interface !== 'NVMe M.2') {
+      compatibilityStatus.textContent = 'NVMe drive is not compatible with this motherboard.';
+      compatibilityStatus.style.color = 'red';
+      return;
+    }
+  }
+  const cpuGpuTDP = selectedCpu.maxTDP + selectedGpu.maxTDP;
+  const psuWattageNeeded = cpuGpuTDP + (cpuGpuTDP * 0.6);
+  if (selectedPsu.wattage < psuWattageNeeded) {
+    compatibilityStatus.textContent = 'The selected PSU does not provide sufficient wattage for your components.';
+    compatibilityStatus.style.color = 'red';
+    return;
+  }
+
+  compatibilityStatus.textContent = 'Components are compatible!';
+  compatibilityStatus.style.color = 'green';
 };
 
 // Event listeners
 cpuDropdown.addEventListener('change', checkCompatibility);
 gpuDropdown.addEventListener('change', checkCompatibility);
 motherboardDropdown.addEventListener('change', checkCompatibility);
+ramDropdown.addEventListener('change', checkCompatibility);
+psuDropdown.addEventListener('change', checkCompatibility);
+nvmeDropdown.addEventListener('change', checkCompatibility);
   </script>
 </body>
 </html>
