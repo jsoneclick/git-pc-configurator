@@ -14,40 +14,42 @@
         <div class="constructorWrapper">
             <nav>
                 <ul>
-                    <li onclick="alert('chel ty dalbaeb')">Save </li>
+                    <li>Save </li>
                     <li><input type="text"></li>
                     <li></li>
                 </ul>
             </nav>
             <aside>
                 <ul>
-                    <li>Logo</li>
-                    <li>+Create</li>
-                    <li>Our choice</li>
-                    <li>Trending</li>
+                    <li><i class="bi bi-pc"></i> Your PCs</li>
+                    <li><i class="bi bi-plus-circle-fill"></i> Create New</li>
+                    <li><i class="bi bi-hand-thumbs-up-fill"></i> Our choice</li>
+                    <li><i class="bi bi-fire"></i> Trending</li>
+                    <li><i class="bi bi-arrow-through-heart-fill"></i> Most Popular</li>
                 </ul>
                 <form id="testComponents">
-                <input type="checkbox" onclick = "testCheckbox('CASE')"> Case<br>
-                <input type="checkbox" onclick = "testCheckbox('CPU')"> CPU<br>
-                <input type="checkbox" onclick = "testCheckbox('GPU')"> GPU<br>
-                <input type="checkbox" onclick = "testCheckbox('PSU')"> PSU<br>
-                <input type="checkbox" onclick = "testCheckbox('NVME')"> NVMe<br>
-                <input type="checkbox" onclick = "testCheckbox('STORAGE_1')"> HDD1<br>
-                <input type="checkbox" onclick = "testCheckbox('STORAGE_2')"> HDD2<br>
-                <input type="checkbox" onclick = "testCheckbox('STORAGE_3')"> HDD3<br>
+                <input type="checkbox" onclick = "testCheckbox('CASE')"> Case
+                <input type="checkbox" onclick = "testCheckbox('CPU')"> CPU
+                <input type="checkbox" onclick = "testCheckbox('GPU')"> GPU
+                <input type="checkbox" onclick = "testCheckbox('PSU')"> PSU
+                <input type="checkbox" onclick = "testCheckbox('NVME')"> NVMe
+                <input type="checkbox" onclick = "testCheckbox('STORAGE_1')"> HDD1
+                <input type="checkbox" onclick = "testCheckbox('STORAGE_2')"> HDD2
+                <input type="checkbox" onclick = "testCheckbox('STORAGE_3')"> HDD3
                 <input type="checkbox" onclick = "testCheckbox('STORAGE_4')"> HDD4<br>
-                <input type="checkbox" onclick = "testCheckbox('RAM_1')"> RAM1<br>
-                <input type="checkbox" onclick = "testCheckbox('RAM_2')"> RAM2<br>
-                <input type="checkbox" onclick = "testCheckbox('RAM_3')"> RAM3<br>
-                <input type="checkbox" onclick = "testCheckbox('RAM_4')"> RAM4<br>
-                <input type="checkbox" onclick = "testCheckbox('CPU_FAN')"> CPU FAN<br>
-                <input type="checkbox" onclick = "testCheckbox('REAR_FAN')"> R FAN<br>
+                <input type="checkbox" onclick = "testCheckbox('RAM_1')"> RAM1
+                <input type="checkbox" onclick = "testCheckbox('RAM_2')"> RAM2
+                <input type="checkbox" onclick = "testCheckbox('RAM_3')"> RAM3
+                <input type="checkbox" onclick = "testCheckbox('RAM_4')"> RAM4
+                <input type="checkbox" onclick = "testCheckbox('CPU_FAN')"> CPU FAN
+                <input type="checkbox" onclick = "testCheckbox('REAR_FAN')"> R FAN
                 <input type="checkbox" onclick = "testCheckbox('FRONT_FAN_1')"> F FAN1<br>
-                <input type="checkbox" onclick = "testCheckbox('FRONT_FAN_2')"> F FAN2<br>
-                <input type="checkbox" onclick = "testCheckbox('FRONT_FAN_3')"> F FAN3<br>
-                <input type="checkbox" onclick = "testCheckbox('UPPER_FAN_1')"> U FAN1<br>
-                <input type="checkbox" onclick = "testCheckbox('UPPER_FAN_2')"> U FAN2<br>
-                <input type="checkbox" onclick = "testCheckbox('MOTHERBOARD')"> Motherboard<br>
+                <input type="checkbox" onclick = "testCheckbox('FRONT_FAN_2')"> F FAN2
+                <input type="checkbox" onclick = "testCheckbox('FRONT_FAN_3')"> F FAN3
+                <input type="checkbox" onclick = "testCheckbox('UPPER_FAN_1')"> U FAN1
+                <input type="checkbox" onclick = "testCheckbox('UPPER_FAN_2')"> U FAN2
+                <input type="checkbox" onclick = "testCheckbox('MOTHERBOARD')"> Motherboard
+                <input type="checkbox" onclick = "testCheckbox()"> All
             </form>
             </aside>
             <aside class="right-components-list">
@@ -153,7 +155,7 @@
                     <span><i class="fa-solid fa-fan"></i> CPU Cooler</span>
                     <span><i class="bi bi-pc"></i> Case</span>
                     <span><i class="fa-solid fa-fan"></i> Front Coolers</span>
-                    <span><i class="fa-solid fa-memory"></i> <select id="ramDropdown"></select></span>
+                    <span><i class="fa-solid fa-memory"></i> <select id="ramDropdown"><option value="RAM">RAM</option></select></span>
                     <span><i class="bi bi-motherboard"></i> <select id="motherboardDropdown"></select></span>
                     <span><i class="bi bi-hdd-stack"></i> HDD Storage</span>
                     <span><i class="bi bi-device-ssd"></i> <select id="nvmeDropdown"></select></span>
@@ -236,7 +238,6 @@
             { name: 'AMD Ryzen 3 3300X', generation: '3rd', maxTDP: 65 },
             { name: 'Intel Core i7-11700K', generation: '11th', maxTDP: 125 },
             { name: 'AMD Ryzen 7 5800X', generation: '5th', maxTDP: 105 },
-            { name: 'Kakayato huinya 2nd gena', generation: '2nd', maxTDP: 75 }
             ];
 
             const gpus = [
@@ -398,7 +399,7 @@
             addToChoosenComponents(components.NVME, nvmeDropdown.value);
             });
 
-            const addToChoosenComponents = (componentName, ...componentType) => {
+            const addToChoosenComponents = (componentType, componentName) => {
             if (!choosenComponents.includes(componentType)) {
                 choosenComponents.push(componentType);
             }
